@@ -1,0 +1,209 @@
+/* Animações de entrada */
+section, .imagem-container img {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.show, .imagem-container img.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Botão voltar ao topo */
+.btn-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+.btn-top:hover {
+    background-color: #004d40;
+}
+
+/* Botão modo dark/light */
+.btn-mode {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+.btn-mode:hover {
+    background-color: #004d40;
+}
+
+/* Tema Dark */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode footer {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode h2, 
+body.dark-mode h3 {
+    color: #80cbc4;
+}
+
+body.dark-mode hr {
+    border-top: 2px dashed #555;
+}
+
+body.dark-mode .btn-top,
+body.dark-mode .btn-mode {
+    background-color: #333;
+}
+
+body.dark-mode a {
+    color: #4dd0e1;
+}
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #00695c;
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.5em;
+}
+
+/* Títulos */
+h2 {
+    margin-top: 40px;
+    color: #004d40;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #00796b;
+}
+
+/* Texto */
+p {
+    margin: 10px 0 20px;
+}
+
+/* Links */
+a {
+    color: #00796b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Imagens */
+.imagem-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.imagem-container img {
+    max-width: 100%;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.imagem-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Linha separadora */
+hr {
+    border: none;
+    border-top: 2px dashed #ccc;
+    margin: 40px 0;
+}
+
+/* Rodapé */
+footer {
+    background-color: #00695c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+.foto-perfil {
+    width: 250px; /* Ajuste o tamanho como desejar */
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white; /* Moldura */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Sombra elegante */
+    display: block;
+    margin: 20px auto; /* Centraliza */
+}
+.foto-perfil:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}

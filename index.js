@@ -1,4 +1,3 @@
-
 // Scroll Suave para os links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
@@ -16,6 +15,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 const btnTop = document.createElement('button');
 btnTop.innerHTML = "🔝";
 btnTop.classList.add('btn-top');
+btnTop.setAttribute('aria-label', 'Voltar ao topo');
 document.body.appendChild(btnTop);
 
 btnTop.addEventListener('click', () => {
@@ -46,9 +46,23 @@ document.querySelectorAll('section, .imagem-container img').forEach(el => {
 const btnMode = document.createElement('button');
 btnMode.innerHTML = "🌙";
 btnMode.classList.add('btn-mode');
+btnMode.setAttribute('aria-label', 'Alternar modo claro/escuro');
 document.body.appendChild(btnMode);
+
+// Verifica tema salvo
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    btnMode.innerHTML = '☀️';
+}
 
 btnMode.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
-    btnMode.innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        btnMode.innerHTML = '☀️';
+    } else {
+        localStorage.setItem('theme', 'light');
+        btnMode.innerHTML = '🌙';
+    }
 });

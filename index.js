@@ -1,68 +1,87 @@
-// Scroll Suave para os links
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
+document.addEventListener('DOMContentLoaded', () => {
+
+    // NAVEGAÇÃO SUAVE
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-});
 
-// Botão voltar ao topo
-const btnTop = document.createElement('button');
-btnTop.innerHTML = "🔝";
-btnTop.classList.add('btn-top');
-btnTop.setAttribute('aria-label', 'Voltar ao topo');
-document.body.appendChild(btnTop);
+    // BOTÃO VOLTAR AO TOPO
+    const btnTop = document.querySelector('.btn-top');
+    if (btnTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btnTop.style.display = 'flex';
+            } else {
+                btnTop.style.display = 'none';
+            }
+        });
+        btnTop.addEventListener('click', () => {
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-btnTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    // ANIMAÇÕES DE SCROLL (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, {
+        threshold: 0.1
     });
-});
 
-window.addEventListener('scroll', () => {
-    btnTop.style.display = (window.scrollY > 400) ? 'block' : 'none';
-});
-
-// Animações quando aparece na tela
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
+    document.querySelectorAll('.project-card').forEach(el => {
+        observer.observe(el);
     });
-});
 
-document.querySelectorAll('section, .imagem-container img').forEach(el => {
-    observer.observe(el);
-});
+    // BOTÃO MODO DARK/LIGHT
+    const btnMode = document.querySelector('.btn-mode');
+    const body = document.body;
 
-// Botão modo dark/light
-const btnMode = document.createElement('button');
-btnMode.innerHTML = "🌙";
-btnMode.classList.add('btn-mode');
-btnMode.setAttribute('aria-label', 'Alternar modo claro/escuro');
-document.body.appendChild(btnMode);
-
-// Verifica tema salvo
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    btnMode.innerHTML = '☀️';
-}
-
-btnMode.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
         btnMode.innerHTML = '☀️';
     } else {
-        localStorage.setItem('theme', 'light');
         btnMode.innerHTML = '🌙';
+    }
+
+    btnMode.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            btnMode.innerHTML = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            btnMode.innerHTML = '🌙';
+        }
+    });
+
+    // MANIPULADOR DO FORMULÁRIO DE CONTATO
+    const contatoForm = document.querySelector('#contato-form form');
+    if(contatoForm) {
+        contatoForm.addEventListener('submit', function(e) {
+            // Apenas para feedback visual, o envio é gerenciado pelo Formspree
+            // Você pode adicionar uma validação mais robusta aqui se desejar
+            const btn = this.querySelector('button');
+            btn.innerText = 'Enviando...';
+            btn.disabled = true;
+
+            // Simula um delay para o usuário ver a mensagem de envio
+            setTimeout(() => {
+                // O Formspree irá redirecionar para uma página de "obrigado".
+                // Se não quiser o redirecionamento, use AJAX.
+            }, 1000);
+        });
     }
 });
